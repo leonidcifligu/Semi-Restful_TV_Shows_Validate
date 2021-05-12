@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Show</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="conteiner">
+
+        <h1>Edit Show</h1>
+        
+        <form action="/shows/{{show.id}}/update" method="post">
+            {% csrf_token %}
+            <h3>Title : <input type="text" name="title" value="{{show.title}}"></h3>
+            <h3>Network : <input type="text" name="network" value="{{show.network}}"></h3>
+            <h3>Release Date : <input type="date" name="release_date" value="{{show.release_date}}"></h3>
+            <h3>Description : <textarea name="description" id="descripttion" cols="20" rows="3">{{show.description}}</textarea></h3>
+
+            <button type="submit">Update</button>
+            
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: green;">{{ message }}</li>    
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </form>
+
+    </div>
+</body>
+</html>
